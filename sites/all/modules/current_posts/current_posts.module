@@ -89,7 +89,7 @@ function current_posts_block_view($delta = '') {
 <script type="text/javascript" src="https://appcenter.intuit.com/Content/IA/intuit.ipp.anywhere.js"></script>
 <script>intuit.ipp.anywhere.setup({
     menuProxy: "http://dev-camikaze.gotpantheon.com/BlueDotMenu",
-    grantUrl: "http://dev-camikaze.gotpantheon.com/oauth/authorized/?appToken=8fd4264fb8e31b427bb9376bef154312fb74"
+    grantUrl: "http://dev-camikaze.gotpantheon.com/oauth/authorized/?appToken=8fd4264fb8e31b427bb9376bef154312fb74&consumerKey=qyprdD01geXt1RTrlw9bxQQSuMrClT&consumerSecret=SDLD64mDm663U68L0lnW0OueWAkTGRtEea332W4j"
 });</script>
 </head>
 <body>
