@@ -89,7 +89,7 @@ function current_posts_block_view($delta = '') {
 <script type="text/javascript" src="https://appcenter.intuit.com/Content/IA/intuit.ipp.anywhere.js"></script>
 <script>intuit.ipp.anywhere.setup({
     menuProxy: "http://dev-camikaze.gotpantheon.com/BlueDotMenu",
-    grantUrl: "http://dev-camikaze.gotpantheon.com/RequestOAuthToken"
+    grantUrl: "https://appcenter.intuit.com/Playground/OAuth/"
 });</script>
 </head>
 <body>
