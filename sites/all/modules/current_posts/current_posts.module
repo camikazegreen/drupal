@@ -94,3 +94,5 @@ function current_posts_block_view($delta = '') {
   }
   
 }
+
+drupal_add_js('https://appcenter.intuit.com/Content/IA/intuit.ipp.anywhere.js', 'external');
