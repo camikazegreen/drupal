@@ -88,8 +88,8 @@ function current_posts_block_view($delta = '') {
 <title>My Connect Page</title>
 <script type="text/javascript" src="https://appcenter.intuit.com/Content/IA/intuit.ipp.anywhere.js"></script>
 <script>intuit.ipp.anywhere.setup({
-    menuProxy: "http://example.com/myapp/BlueDotMenu",
-    grantUrl: "http://example.com/myapp/RequestOAuthToken"
+    menuProxy: "http://dev-camikaze.gotpantheon.com/BlueDotMenu",
+    grantUrl: "http://dev-camikaze.gotpantheon.com/RequestOAuthToken"
 });</script>
 </head>
 <body>
