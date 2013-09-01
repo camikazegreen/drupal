@@ -1,5 +1,6 @@
 name = Current Posts
 description = A sample company to learn on.
 version = 7.x
+core = 7.x
 
 regions[content] = 'content' ;; All D7 themes need this.
