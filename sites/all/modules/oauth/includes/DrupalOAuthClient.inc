@@ -247,8 +247,9 @@ class DrupalOAuthClient {
     $params = array();
     parse_str($response, $params);
 
+    print_r("This is the token ".$response);
     if (empty($params['oauth_token']) || empty($params['oauth_token_secret'])) {
-      throw new Exception('No valid access token was returned');
+      throw new Exception($response);
     }
 
     // Check if we've has recieved this token previously and if so use the old one

@@ -38,18 +38,43 @@ function _oauth_common_validate_request_callback($type, $unsigned = NULL) {
  * @param $csid Should contain the id of the consumer when used in the client flow
  */
 function oauth_common_page_authorized($csid = NULL) {
+  // watchdog('at first',print_r($csid , false));
   // If we have an oauth_token we're acting as a consumer and just got authorized
+
   if (!empty($_GET['oauth_token'])) {
     //TODO: Add documentation on how to use the callback url with
+    // watchdog('MVC', print_r($csid));
+
     $consumer = $csid ? DrupalOAuthConsumer::loadById($csid, FALSE) : FALSE;
+    // watchdog('at first',print_r($consumer,true));
     if ($consumer) {
       $request_token = DrupalOAuthToken::loadByKey($_GET['oauth_token'], $consumer, OAUTH_COMMON_TOKEN_TYPE_REQUEST);
+      $realm_id =  DrupalOAuthToken::loadByKey($_GET['realmId'], $consumer, OAUTH_COMMON_TOKEN_TYPE_REQUEST);
     }
     else {
       // Backwards compatibility with 6.x-3.0-beta3
       $request_token = DrupalOAuthToken::load($_GET['oauth_token'], FALSE);
+      $realm_id =  DrupalOAuthToken::load($_GET['realmId'], FALSE);
+
+      // watchdog('realm' , print_r($_GET['realmId'], TRUE));
+      // watchdog('token' , print_r($_GET['oauth_token'], TRUE));
+      // $some_token = print_r($_GET['oauth_token'], TRUE);
+      $realm_id = $_GET['realmId'];
+
+      // --------------------------------------------------------
+// $sql = 'UPDATE oauth_common_token SET oauth_common_token.realm_id = "$realm_id" WHERE oauth_common_token.oauth_token = "$some_token"';
+// mysql_query($sql);
+  //     $query = db_update('oauth_common_token')
+  // ->condition('uid', '1')
+  // ->fields(array(
+  //   'realm_id' => $realm_id,
+  // ))
+  // ->execute();
+
+// ---------------------------------------------------------
       $consumer = $request_token ? $request_token->consumer : FALSE;
     }
+
     if (!empty($request_token)) {
       $client = new DrupalOAuthClient($consumer, $request_token);
 
@@ -60,8 +85,11 @@ function oauth_common_page_authorized($csid = NULL) {
         // We received a new token - save it
         if (!$access_token->in_database) {
           $access_token->write();
+          print_r(debug_backtrace());
+
         }
         $request_token->delete();
+
         module_invoke_all('oauth_common_authorized', $consumer, $access_token, $request_token);
       }
     }
@@ -227,6 +255,8 @@ function oauth_common_form_authorize() {
   }
   else {
     $query = $_GET;
+    watchdog('error',print_r($_GET));
+
     unset($query['q']); // why are there so few q's?
     // Allow this path to be set to something other than the standard
     // login page in case the site has a mobile-enhanced login page.

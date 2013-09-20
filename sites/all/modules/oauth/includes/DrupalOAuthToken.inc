@@ -10,7 +10,6 @@ class DrupalOAuthToken extends OAuthToken {
   public $changed = 0;
   public $services = array();
   public $authorized = 0;
-
   public $in_database = FALSE;
 
   public function __construct($key, $secret, $consumer, $params = array()) {
@@ -60,6 +59,7 @@ class DrupalOAuthToken extends OAuthToken {
         'authorized' => $this->authorized,
       );
 
+
       if ($update) {
         $values['tid'] = $this->tid;
       }
@@ -75,14 +75,17 @@ class DrupalOAuthToken extends OAuthToken {
       }
     }
 
+   $derp = $_GET['realmId'];
+
     $values = array(
+	'realm_id' => $derp,
       'csid'      => $this->consumer->csid,
       'key_hash'  => sha1($this->key),
       'token_key' => $this->key,
       'secret'    => $this->secret,
       'expires'   => $this->expires,
       'type'      => $this->type,
-      'uid'       => $this->uid,
+      'uid'       => $this->uid
     );
 
     if ($update) {

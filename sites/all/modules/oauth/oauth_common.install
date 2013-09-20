@@ -268,6 +268,13 @@ function _oauth_common_token_schema() {
         'not null' => TRUE,
         'default' => 0
       ),
+      'realm_id' => array(
+        'description' => 'The Realm ID to identify the company file.',
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'default' => 0
+      ),
       'key_hash' => array(
         'description' => 'SHA1-hash of token_key.',
         'type'        => 'char',
