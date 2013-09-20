@@ -81,7 +81,6 @@ function current_posts_block_view($delta = '') {
           ); 
         }
        // No content in the last week.
-        if (empty($items)) {
           $block['content'] = t('<html xmlns="http://www.w3.org/1999/xhtml" xmlns:ipp="">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -89,7 +88,7 @@ function current_posts_block_view($delta = '') {
 <script type="text/javascript" src="https://appcenter.intuit.com/Content/IA/intuit.ipp.anywhere.js"></script>
 <script>intuit.ipp.anywhere.setup({
     menuProxy: "http://dev-camikaze.gotpantheon.com/BlueDotMenu",
-    grantUrl: "http://dev-camikaze.gotpantheon.com/oauth/authorized/?appToken=8fd4264fb8e31b427bb9376bef154312fb74&consumerKey=qyprdD01geXt1RTrlw9bxQQSuMrClT&consumerSecret=SDLD64mDm663U68L0lnW0OueWAkTGRtEea332W4j"
+    grantUrl: "<?php print $baseURL ?> /oauth/authorized/1"
 });</script>
 </head>
 <body>
@@ -98,16 +97,24 @@ function current_posts_block_view($delta = '') {
 
 </body>
 </html>');  
-        } 
-        else {
-          // Pass data through theme function.
-          $block['content'] = theme('item_list', array(
-            'items' => $items));
-        }
+        
+        
       }
     return $block;
   }
   
+}
+function current_posts_menu() {
+   $items['oauth/authorized/1'] = array(
+    'title' => 'Permissioned Example',
+    'page callback' => 'current_posts_oauth_common_authorize',
+    #'page arguments' => array(t('A menu item that requires the "access protected menu example" permission is at <a href="!link">examples/menu_example/permissioned/controlled</a>', array('!link' => url('examples/menu_example/permissioned/controlled')))),
+    'access callback' => TRUE,
+    'expanded' => TRUE,
+  );
+}
+function current_posts_oauth_common_authorized($consumer, $access_token, $request_token){
+  watchdog('current_posts:', 'CRAP I HAVE JALAPENOS ON MY HANDS RUBBING ON MY EYES');
 }
 
 drupal_add_js('https://appcenter.intuit.com/Content/IA/intuit.ipp.anywhere.js', 'external');
